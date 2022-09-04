@@ -1,11 +1,7 @@
 package wechatpayapiv3
 
 const (
-	apiUrl = "https://api.mch.weixin.qq.com"
-)
-
-const (
+	apiUrl   = "https://api.mch.weixin.qq.com"
 	logTable = "wechatpayapiv3"
+	Version  = "1.0.6"
 )
-
-const Version = "1.0.5"
