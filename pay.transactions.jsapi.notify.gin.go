@@ -39,6 +39,7 @@ func (c *Client) PayTransactionsJsapiNotifyGin(ctx context.Context, ginCtx *gin.
 	return validateJson, response, gcm, err
 }
 
+// PayTransactionsJsapiNotifyGinResponse JSAPI下单 - 回调通知 - 解密后数据
 type PayTransactionsJsapiNotifyGinResponse struct {
 	Appid          string `json:"appid"`            // 应用ID
 	Mchid          string `json:"mchid"`            // 商户号

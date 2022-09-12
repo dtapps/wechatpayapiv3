@@ -39,6 +39,7 @@ func (c *Client) RefundDomesticRefundsNotifyGin(ctx context.Context, ginCtx *gin
 	return validateJson, response, gcm, err
 }
 
+// RefundDomesticRefundsNotifyGinResponse 申请退款API - 回调通知 - 解密后数据
 type RefundDomesticRefundsNotifyGinResponse struct {
 	Mchid               string `json:"mchid"`                 // 直连商户号
 	OutTradeNo          string `json:"out_trade_no"`          // 商户订单号
