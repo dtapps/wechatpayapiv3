@@ -1,5 +1,7 @@
 package wechatpayapiv3
 
+import "go.dtapp.net/golog"
+
 func (c *Client) GetAppId() string {
 	return c.config.appId
 }
@@ -26,4 +28,12 @@ func (c *Client) GetMchSslKey() string {
 
 func (c *Client) GetMchSslSerialNo() string {
 	return c.config.mchSslSerialNo
+}
+
+func (c *Client) GetLogGorm() *golog.ApiClient {
+	return c.log.logGormClient
+}
+
+func (c *Client) GetLogMongo() *golog.ApiClient {
+	return c.log.logMongoClient
 }
