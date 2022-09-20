@@ -30,10 +30,6 @@ func (c *Client) GetMchSslSerialNo() string {
 	return c.config.mchSslSerialNo
 }
 
-func (c *Client) GetLogGorm() *golog.ApiClient {
-	return c.log.logGormClient
-}
-
-func (c *Client) GetLogMongo() *golog.ApiClient {
-	return c.log.logMongoClient
+func (c *Client) GetLog() *golog.ApiClient {
+	return c.log.client
 }
