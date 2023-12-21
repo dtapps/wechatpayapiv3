@@ -6,24 +6,24 @@ import (
 	"net/http"
 )
 
-func (c *Client) request(ctx context.Context, url string, params map[string]interface{}, method string, commonParams bool) (gorequest.Response, error) {
+func (c *Client) request(ctx context.Context, url string, param gorequest.Params, method string, commonParams bool) (gorequest.Response, error) {
 
 	// 公共参数
 	if method == http.MethodPost {
 		if commonParams == true {
-			params["appid"] = c.GetAppId()
-			params["mchid"] = c.GetMchId()
+			param.Set("appid", c.GetAppId())
+			param.Set("mchid", c.GetMchId())
 		}
 	}
 
 	// 认证
-	authorization, err := c.authorization(method, params, url)
+	authorization, err := c.authorization(method, param, url)
 	if err != nil {
 		return gorequest.Response{}, err
 	}
 
 	// 创建请求
-	client := c.requestClient
+	client := gorequest.NewHttp()
 
 	// 设置请求地址
 	client.SetUri(url)
@@ -34,8 +34,11 @@ func (c *Client) request(ctx context.Context, url string, params map[string]inte
 	// 设置JSON格式
 	client.SetContentTypeJson()
 
+	// 设置用户代理
+	client.SetUserAgent(gorequest.GetRandomUserAgentSystem())
+
 	// 设置参数
-	client.SetParams(params)
+	client.SetParams(param)
 
 	// 设置头部
 	client.SetHeader("Authorization", "WECHATPAY2-SHA256-RSA2048 "+authorization)
@@ -52,8 +55,8 @@ func (c *Client) request(ctx context.Context, url string, params map[string]inte
 	}
 
 	// 记录日志
-	if c.log.status {
-		go c.log.client.Middleware(ctx, request, Version)
+	if c.gormLog.status {
+		go c.gormLog.client.Middleware(ctx, request)
 	}
 
 	return request, err

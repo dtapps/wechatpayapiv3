@@ -6,5 +6,4 @@ const (
 
 const (
 	LogTable = "wechatpayapiv3"
-	Version  = "1.0.12"
 )

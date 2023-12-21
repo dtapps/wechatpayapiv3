@@ -13,5 +13,5 @@
 #### 安装
 
 ```shell
-go get -v -u go.dtapp.net/wechatpayapiv3
+go get -v -u go.dtapp.net/wechatpayapiv3@v1.0.13
 ```

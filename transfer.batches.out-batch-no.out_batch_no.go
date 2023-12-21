@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-type TransferBatchesOutBatchNoResponse struct {
+type TransferBatchesOutBatchNoOutBatchNoResponse struct {
 	TransferBatch struct {
 		Mchid           string `json:"mchid"`                  // 微信支付分配的商户号
 		OutBatchNo      string `json:"out_batch_no"`           // 商户系统内部的商家批次单号，在商户系统内部唯一
@@ -35,28 +35,28 @@ type TransferBatchesOutBatchNoResponse struct {
 	} `json:"transfer_detail_list,omitempty"` // 当批次状态为“FINISHED”（已完成），且成功查询到转账明细单时返回。包括微信明细单号、明细状态信息
 }
 
-type TransferBatchesOutBatchNoResult struct {
-	Result TransferBatchesOutBatchNoResponse // 结果
-	Body   []byte                            // 内容
-	Http   gorequest.Response                // 请求
+type TransferBatchesOutBatchNoOutBatchNoResult struct {
+	Result TransferBatchesOutBatchNoOutBatchNoResponse // 结果
+	Body   []byte                                      // 内容
+	Http   gorequest.Response                          // 请求
 }
 
-func newTransferBatchesOutBatchNoResult(result TransferBatchesOutBatchNoResponse, body []byte, http gorequest.Response) *TransferBatchesOutBatchNoResult {
-	return &TransferBatchesOutBatchNoResult{Result: result, Body: body, Http: http}
+func newTransferBatchesOutBatchNoOutBatchNoResult(result TransferBatchesOutBatchNoOutBatchNoResponse, body []byte, http gorequest.Response) *TransferBatchesOutBatchNoOutBatchNoResult {
+	return &TransferBatchesOutBatchNoOutBatchNoResult{Result: result, Body: body, Http: http}
 }
 
-// TransferBatchesOutBatchNo 通过微信批次单号查询批次单
-// https://pay.weixin.qq.com/docs/merchant/apis/batch-transfer-to-balance/transfer-batch/get-transfer-batch-by-no.html
-func (c *Client) TransferBatchesOutBatchNo(ctx context.Context, notMustParams ...gorequest.Params) (*TransferBatchesOutBatchNoResult, error) {
+// TransferBatchesOutBatchNoOutBatchNo 通过商家批次单号查询批次单
+// https://pay.weixin.qq.com/docs/merchant/apis/batch-transfer-to-balance/transfer-batch/get-transfer-batch-by-out-no.html
+func (c *Client) TransferBatchesOutBatchNoOutBatchNo(ctx context.Context, outBatchNo string, notMustParams ...gorequest.Params) (*TransferBatchesOutBatchNoOutBatchNoResult, error) {
 	// 参数
 	params := gorequest.NewParamsWith(notMustParams...)
 	// 请求
-	request, err := c.request(ctx, apiUrl+"/v3/transfer/batches/out-batch-no", params, http.MethodGet, false)
+	request, err := c.request(ctx, apiUrl+"/v3/transfer/batches/out-batch-no/"+outBatchNo, params, http.MethodGet, false)
 	if err != nil {
-		return newTransferBatchesOutBatchNoResult(TransferBatchesOutBatchNoResponse{}, request.ResponseBody, request), err
+		return newTransferBatchesOutBatchNoOutBatchNoResult(TransferBatchesOutBatchNoOutBatchNoResponse{}, request.ResponseBody, request), err
 	}
 	// 定义
-	var response TransferBatchesOutBatchNoResponse
+	var response TransferBatchesOutBatchNoOutBatchNoResponse
 	err = gojson.Unmarshal(request.ResponseBody, &response)
-	return newTransferBatchesOutBatchNoResult(response, request.ResponseBody, request), err
+	return newTransferBatchesOutBatchNoOutBatchNoResult(response, request.ResponseBody, request), err
 }
