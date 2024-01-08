@@ -1,8 +1,8 @@
 <h1>
-<a href="https://www.dtapp.net/">Golang wechatpayapiv3</a>
+<a href="https://www.dtapp.net/">Golang</a>
 </h1>
 
-📦 Golang wechatpayapiv3
+📦 Golang 微信支付V3
 
 [comment]: <> (go)
 [![godoc](https://pkg.go.dev/badge/go.dtapp.net/wechatpayapiv3?status.svg)](https://pkg.go.dev/go.dtapp.net/wechatpayapiv3)
@@ -13,5 +13,5 @@
 #### 安装
 
 ```shell
-go get -v -u go.dtapp.net/wechatpayapiv3@v1.0.13
+go get -v -u go.dtapp.net/wechatpayapiv3@v1.0.14
 ```
