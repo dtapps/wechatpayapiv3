@@ -15,11 +15,11 @@ type RefundDomesticRefundsNotifyHttpRequest struct {
 	Summary      string `json:"summary" xml:"summary"`             // 通知简要说明
 	ResourceType string `json:"resource_type" xml:"resource_type"` // 通知数据类型
 	Resource     struct {
-		Algorithm      string `json:"algorithm" xml:"algorithm"`             // 加密算法类型
-		Ciphertext     string `json:"ciphertext" xml:"ciphertext"`           // 数据密文
-		AssociatedData string `json:"associated_data" xml:"associated_data"` // 附加数据
-		OriginalType   string `json:"original_type" xml:"original_type"`     // 原始类型
-		Nonce          string `json:"nonce" xml:"nonce"`                     // 随机串
+		Algorithm      string `json:"algorithm" xml:"algorithm"`                                 // 加密算法类型
+		Ciphertext     string `json:"ciphertext" xml:"ciphertext"`                               // 数据密文
+		AssociatedData string `json:"associated_data,omitempty" xml:"associated_data,omitempty"` // 附加数据
+		OriginalType   string `json:"original_type" xml:"original_type"`                         // 原始类型
+		Nonce          string `json:"nonce" xml:"nonce"`                                         // 随机串
 	} `json:"resource" xml:"resource"` // 通知数据
 }
 
