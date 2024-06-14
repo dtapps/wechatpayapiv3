@@ -11,6 +11,9 @@ import (
 
 func (c *Client) request(ctx context.Context, url string, param gorequest.Params, method string, commonParams bool, response any) (gorequest.Response, error) {
 
+	// 请求地址
+	uri := apiUrl + url
+
 	// 公共参数
 	if method == http.MethodPost {
 		if commonParams == true {
@@ -20,13 +23,12 @@ func (c *Client) request(ctx context.Context, url string, param gorequest.Params
 	}
 
 	// 认证
-	authorization, err := c.authorization(method, param, url)
+	authorization, err := c.authorization(method, param, uri)
 	if err != nil {
+		c.TraceRecordError(err)
+		c.TraceSetStatus(codes.Error, err.Error())
 		return gorequest.Response{}, err
 	}
-
-	// 请求地址
-	uri := apiUrl + url
 
 	// 设置请求地址
 	c.httpClient.SetUri(uri)
